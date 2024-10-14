@@ -421,7 +421,9 @@ jQuery(function () {
                         that.version = res.data.data.latest;
                         that.donate = res.data.data.donate;
                     }
-                })
+                }).catch(e => {
+                console.log(e)
+            })
         }
     });
 })
