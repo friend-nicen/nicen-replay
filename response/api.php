@@ -86,7 +86,7 @@ function nicen_replay_getip() {
 
 /**
  * @return WP_Error|WP_HTTP_Response|WP_REST_Response
- * 获取用户的IP
+ * 记录事件
  */
 function nicen_replay_event() {
 
@@ -129,9 +129,11 @@ function nicen_replay_event() {
 	$file_name = sanitize_file_name( $ip ); // 清理文件名以确保安全
 	$file_path = $events_dir . '/' . $file_name . '.txt'; // 拼接文件路径
 
+
 	/* 将events变量追加到文件内 */
 	/* 首先，我们需要确保$events是一个数组，然后对其进行JSON编码 */
 	$events_data = json_encode( $json['events'], JSON_UNESCAPED_UNICODE ) . "\n";
+
 
 	/* 将数据追加到文件中 */
 	file_put_contents( $file_path, $events_data, FILE_APPEND | LOCK_EX );
