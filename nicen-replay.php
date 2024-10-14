@@ -43,7 +43,6 @@ include_once nicen_replay_path . '/admin/load.php'; //加载后台插件资源
  * 只在后台才触发
  * */
 if ( is_admin() ) {
-	include_once nicen_replay_path . '/admin/load.php'; //加载后台插件资源
 	include_once nicen_replay_path . '/admin/form.php'; //加载后台设置表单
 	include_once nicen_replay_path . '/admin/setting.php';//渲染表单
 	include_once nicen_replay_path . '/admin/initialize.php'; //初始化插件功能

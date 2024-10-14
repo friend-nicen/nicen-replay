@@ -8,6 +8,28 @@
 /* 添加rest_api_init动作钩子，在WordPress初始化REST API时注册自定义路由 */
 add_action( 'rest_api_init', 'nicen_replay_rest_register_routes' );
 
+/* 初始化 */
+add_action( 'init', 'nicen_replay_remove_rest_api_hooks' );
+
+/**
+ * @return void
+ * 保证rest_api运行
+ */
+function nicen_replay_remove_rest_api_hooks() {
+	/* 解除屏蔽 REST API */
+	if ( version_compare( get_bloginfo( 'version' ), '4.7', '>=' ) ) {
+		remove_all_filters( 'rest_authentication_errors' );
+	} else {
+		/* 解除屏蔽 REST API */
+		remove_all_filters( 'json_enabled' );
+		remove_all_filters( 'json_jsonp_enabled' );
+		/* Filters for WP-API version 2.x */
+		remove_all_filters( 'rest_enabled' );
+		remove_all_filters( 'rest_jsonp_enabled' );
+	}
+}
+
+
 /* 定义注册路由的函数 */
 function nicen_replay_rest_register_routes() {
 

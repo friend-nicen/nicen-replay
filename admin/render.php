@@ -12,8 +12,7 @@
  */
 function nicen_replay_player() {
 
-	$scheme = ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http';
-	$domain = $scheme . '://' . $_SERVER['HTTP_HOST'];
+	$domain = site_url();
 
 	?>
     <div class="player">
@@ -34,6 +33,15 @@ function nicen_replay_update() {
 	    </a-form-item>
 	    <a-form-item :label-col="labelCol" label="BUG反馈">
 		  		微信号good7341、Github提交issue、博客nicen.cn下方留言均可
+	    </a-form-item>
+	    <a-form-item :label-col="labelCol" label="仓库地址">
+		  		Github：<a target="_blank" href="https://github.com/friend-nicen/nicen-replay">https://github.com/friend-nicen/nicen-replay</a>
+				<br />
+				Gitee：<a target="_blank" href="https://gitee.com/friend-nicen/nicen-replay">https://gitee.com/friend-nicen/nicen-replay</a>
+				<br />
+				博客：<a target="_blank" href="https://nicen.cn/7565.html">https://nicen.cn/7565.html</a>
+				<br />
+				仓库内的版本永远是最新版本，如您觉得插件给你带来了帮助，欢迎star！祝您早日达成自己的目标！
 	    </a-form-item>
 	     <a-form-item :label-col="labelCol" label="礼轻情意重">
 	     

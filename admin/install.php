@@ -6,6 +6,9 @@
  */
 
 
+/* 版本 */
+const NICEN_REPLAY_VERSION = '1.0.1';
+
 /**
  * 初始化默认配置
  * */

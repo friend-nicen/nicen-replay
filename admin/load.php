@@ -27,7 +27,7 @@ function nicen_replay_admin_load_source() {
 	const PLUGIN_CONFIG=%s;
 	const NICEN_VERSION='%s';", [
 		json_encode( nicen_replay_config() ),
-		esc_js( NICEN_VERSION )
+		esc_js( NICEN_REPLAY_VERSION )
 	] ), 'before' );
 
 
@@ -54,8 +54,12 @@ if ( strpos( $_SERVER['QUERY_STRING'] ?? "", 'nicen_replay_plugin' ) !== false )
  * 前台加载监控
  */
 function nicen_replay_front() {
+	/* 站点URL */
+	$site_url = site_url();
 	/* 加载外部库 */
 	wp_enqueue_script( 'replay', nicen_replay_url . 'assets/replay.js', array(), filemtime( nicen_replay_path . 'assets/replay.js' ), true );
+	/* 内联的js */
+	wp_add_inline_script( "replay", "window.base_url = '{$site_url}';", 'before' );
 	/* 内联的js */
 	wp_add_inline_script( "replay", 'replayInit();' );
 }
