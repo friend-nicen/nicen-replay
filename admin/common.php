@@ -26,3 +26,25 @@ function nicen_rrweb_config( $key = '' ) {
 		return $nicen_rrweb_CONFIGS[ $key ];
 	}
 }
+
+
+/**
+ * @param $ip
+ *
+ * @return false|string
+ * IP归属地查询
+ */
+function nicen_rrweb_ip( $ip ) {
+
+	$json = json_decode( file_get_contents( "http://mini.nicen.cn/ip?query=" . $ip ), true );
+
+	if ( empty( $json['code'] ) ) {
+		return "未知";
+	} else {
+		$data = $json['data']; //数据源
+
+		return "{$data['provice']}{$data['city']} {$data['icp']}";
+	}
+
+
+}

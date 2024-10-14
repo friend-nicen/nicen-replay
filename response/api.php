@@ -156,7 +156,7 @@ function nicen_rrweb_get_all_logs() {
 			/* 添加到数据数组 */
 			$data[] = [
 				'ip'   => $info[0],
-				'city' => "未知3", // 需要实现Common::ip()方法
+				'city' => nicen_rrweb_ip( $info[0] ), // 需要实现Common::ip()方法
 				'time' => filemtime( $file ),
 				'date' => $date,
 				'size' => $size,
