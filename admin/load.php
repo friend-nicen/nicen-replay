@@ -31,6 +31,14 @@ function nicen_replay_admin_load_source() {
 	] ), 'before' );
 
 
+	$path = nicen_replay_path . 'events';
+
+	if ( ! is_writable( $path ) ) {
+		/*输出本地化日志*/
+		echo '<script>window.addEventListener("load",()=>{alert("' . esc_js( $path ) . '数据目录不可写，插件无法生效！");})</script>', 'after';
+	}
+
+
 }
 
 
