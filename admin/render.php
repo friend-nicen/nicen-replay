@@ -17,7 +17,7 @@ function nicen_rrweb_player() {
 
 	?>
     <div class="player">
-        <iframe src="<?php echo $scheme; ?>://player.nicen.cn/?api=<?php echo $domain; ?>"></iframe>
+        <iframe src="<?php echo nicen_rrweb_url; ?>/response/player.html?api=<?php echo $domain; ?>"></iframe>
     </div>
 	<?php
 }
