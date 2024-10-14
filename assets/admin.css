@@ -86,6 +86,51 @@
 }
 
 
+#VueApp .card-container > .ant-tabs-card > .ant-tabs-content .vip {
+    padding-bottom: 30px;
+}
+
+#VueApp .card-container > .ant-tabs-card > .ant-tabs-content .vip .top {
+    color: red;
+}
+
+#VueApp .card-container > .ant-tabs-card > .ant-tabs-content .vip .features {
+    list-style: decimal;
+    margin-top: 32px;
+}
+
+#VueApp .card-container > .ant-tabs-card > .ant-tabs-content .vip .features .item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#VueApp .card-container > .ant-tabs-card > .ant-tabs-content .vip .features .item:after {
+    background-color: black;
+    border-radius: 50%;
+    padding: 0 6px;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    content: "×";
+}
+
+#VueApp .card-container > .ant-tabs-card > .ant-tabs-content .vip .features .ok:after {
+    background-color: #07c160;
+    border-radius: 50%;
+    padding: 0 6px;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    content: "√";
+}
+
+#VueApp .card-container > .ant-tabs-card > .ant-tabs-content .vip .bottom {
+    margin-top: 32px;
+}
+
 #VueApp .card-container > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
     background: #fff;
     padding: 36px 42px 10px 42px;

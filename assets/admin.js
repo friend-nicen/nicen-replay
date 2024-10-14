@@ -7,8 +7,8 @@
 /**
  * 获取缓存的tab
  * */
-let tab = localStorage.getItem('nicen_rrweb_plugin_tab');
-tab = (!tab) ? 'nicen_rrweb_player' : tab;
+let tab = localStorage.getItem('nicen_replay_plugin_tab');
+tab = (!tab) ? 'nicen_replay_player' : tab;
 
 /**
  * 语言包
@@ -346,38 +346,38 @@ jQuery(function () {
              * */
             time_start: {
                 get() {
-                    if (!this.data.nicen_rrweb_publish_time_start) {
+                    if (!this.data.nicen_replay_publish_time_start) {
                         return null;
                     }
-                    return moment(today + " " + this.data.nicen_rrweb_publish_time_start);
+                    return moment(today + " " + this.data.nicen_replay_publish_time_start);
                 },
                 set(value) {
 
                     if (!value) {
-                        this.data.nicen_rrweb_publish_time_start = null;
+                        this.data.nicen_replay_publish_time_start = null;
                         return;
                     }
 
-                    this.data.nicen_rrweb_publish_time_start = value.format("HH:mm:ss");
+                    this.data.nicen_replay_publish_time_start = value.format("HH:mm:ss");
                 }
             },
             time_end: {
                 get() {
 
-                    if (!this.data.nicen_rrweb_publish_time_end) {
+                    if (!this.data.nicen_replay_publish_time_end) {
                         return null;
                     }
 
-                    return moment(today + " " + this.data.nicen_rrweb_publish_time_end);
+                    return moment(today + " " + this.data.nicen_replay_publish_time_end);
                 },
                 set(value) {
 
                     if (!value) {
-                        this.data.nicen_rrweb_publish_time_end = null;
+                        this.data.nicen_replay_publish_time_end = null;
                         return;
                     }
 
-                    this.data.nicen_rrweb_publish_time_end = value.format("HH:mm:ss");
+                    this.data.nicen_replay_publish_time_end = value.format("HH:mm:ss");
                 }
             }
         },
@@ -394,7 +394,7 @@ jQuery(function () {
              * tab改变
              * */
             change(res) {
-                localStorage.setItem('nicen_rrweb_plugin_tab', res);
+                localStorage.setItem('nicen_replay_plugin_tab', res);
             }
             ,
             /**
@@ -409,8 +409,19 @@ jQuery(function () {
             }
         }
         ,
-        created() {
 
+        created() {
+            /* 当前 */
+            let that = this;
+            /*同步插件更新日志*/
+            axios.get("https://weixin.nicen.cn/api/replay")
+                .then((res) => {
+                    if (res.data.code) {
+                        that.html = res.data.data.info;
+                        that.version = res.data.data.latest;
+                        that.donate = res.data.data.donate;
+                    }
+                })
         }
     });
 })

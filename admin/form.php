@@ -21,7 +21,7 @@ include_once __DIR__ . '/render.php'; //引入各种渲染函数
 /**
  * 加载主题设置页面
  * */
-function nicen_rrweb_setting_load( $options ) {
+function nicen_replay_setting_load( $options ) {
 
 	global $plugin_page;
 
@@ -57,7 +57,7 @@ function nicen_rrweb_setting_load( $options ) {
                         <a-tabs type="card" v-model="activeKey" @change="change">
 							<?php
 							//输出输入域
-							nicen_rrweb_do_settings_sections_user( $plugin_page );
+							nicen_replay_do_settings_sections_user( $plugin_page );
 							?>
                         </a-tabs>
                     </div>
@@ -79,7 +79,7 @@ function nicen_rrweb_setting_load( $options ) {
  *
  * @param array $callback ,一些配置 [render,自定义渲染函数，key，显示隐藏的字段，忽略的字段 ignore
  * */
-function nicen_rrweb_do_settings_fields_user( $page, $section, $callback = false ) {
+function nicen_replay_do_settings_fields_user( $page, $section, $callback = false ) {
 	global $wp_settings_fields;
 	if ( ! isset( $wp_settings_fields[ $page ][ $section ] ) ) {
 		return;
@@ -176,7 +176,7 @@ function nicen_rrweb_do_settings_fields_user( $page, $section, $callback = false
 /**
  * 主题设置片段页面输出
  * */
-function nicen_rrweb_do_settings_sections_user( $page ) {
+function nicen_replay_do_settings_sections_user( $page ) {
 	global $wp_settings_sections;
 
 
@@ -208,7 +208,7 @@ function nicen_rrweb_do_settings_sections_user( $page ) {
 		 * @param $section array 分节的信息
 		 * */
 
-		nicen_rrweb_do_settings_fields_user( $page, $section['id'], $section['callback'] ?? false );
+		nicen_replay_do_settings_fields_user( $page, $section['id'], $section['callback'] ?? false );
 
 		/**
 		 * 回调函数如果有自定义输出
@@ -227,7 +227,7 @@ function nicen_rrweb_do_settings_sections_user( $page ) {
 /**
  * 数字输入框
  * */
-function nicen_rrweb_form_number( $args ) {
+function nicen_replay_form_number( $args ) {
 	?>
     <a-input-number
             name="<?php echo esc_html( $args['label_for'] ); ?>"
@@ -242,7 +242,7 @@ function nicen_rrweb_form_number( $args ) {
 /**
  * 基础输入框
  * */
-function nicen_rrweb_form_input( $args ) {
+function nicen_replay_form_input( $args ) {
 	?>
     <a-input
             name="<?php echo esc_html( $args['label_for'] ); ?>"
@@ -256,7 +256,7 @@ function nicen_rrweb_form_input( $args ) {
 /**
  * 基础密码输入框
  * */
-function nicen_rrweb_form_password( $args ) {
+function nicen_replay_form_password( $args ) {
 	?>
     <a-input-password
             name="<?php echo esc_html( $args['label_for'] ); ?>"
@@ -269,7 +269,7 @@ function nicen_rrweb_form_password( $args ) {
 /**
  * 基础开关
  * */
-function nicen_rrweb_form_switch( $args ) {
+function nicen_replay_form_switch( $args ) {
 	?>
     <input name="<?php echo esc_html( $args['label_for'] ); ?>"
            v-model="data.<?php echo esc_html( $args['label_for'] ); ?>"
@@ -285,7 +285,7 @@ function nicen_rrweb_form_switch( $args ) {
 /**
  * 基础开关
  * */
-function nicen_rrweb_form_textarea( $args ) {
+function nicen_replay_form_textarea( $args ) {
 	?>
     <a-textarea
             name="<?php echo esc_html( $args['label_for'] ); ?>"
@@ -300,7 +300,7 @@ function nicen_rrweb_form_textarea( $args ) {
 /**
  * 基础开关
  * */
-function nicen_rrweb_form_color( $args ) {
+function nicen_replay_form_color( $args ) {
 	?>
     <div style="display: flex;align-items: center">
         <input name="<?php echo esc_html( $args['label_for'] ); ?>"
@@ -319,7 +319,7 @@ function nicen_rrweb_form_color( $args ) {
 /**
  * 文字说明
  * */
-function nicen_rrweb_plugin_form_text( $args ) {
+function nicen_replay_plugin_form_text( $args ) {
 	?>
     <!-- I need echo HTML,This isn't input from user. -->
     <div class="info"><?php echo wp_kses_post( $args['info'] ); ?></div>
@@ -330,7 +330,7 @@ function nicen_rrweb_plugin_form_text( $args ) {
 /**
  * 单选
  * */
-function nicen_rrweb_form_select( $args ) {
+function nicen_replay_form_select( $args ) {
 	?>
     <input name="<?php echo esc_html( $args['label_for'] ); ?>"
            v-model="data.<?php echo esc_html( $args['label_for'] ); ?>"
@@ -349,7 +349,7 @@ function nicen_rrweb_form_select( $args ) {
 /**
  * 单选
  * */
-function nicen_rrweb_form_multi( $args ) {
+function nicen_replay_form_multi( $args ) {
 
 	?>
 

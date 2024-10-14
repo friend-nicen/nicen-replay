@@ -4,26 +4,26 @@
  * 公共数据和方法
  * */
 
-global $nicen_rrweb_CONFIGS; //声明全局变量
+global $nicen_replay_CONFIGS; //声明全局变量
 
-$nicen_rrweb_CONFIGS = []; //保存所有插件配置
+$nicen_replay_CONFIGS = []; //保存所有插件配置
 
 /**
  * 遍历整个配置
  * */
-foreach ( nicen_rrweb_CONFIG as $key => $value ) {
-	$nicen_rrweb_CONFIGS[ $key ] = get_option( $key );
+foreach ( nicen_replay_CONFIG as $key => $value ) {
+	$nicen_replay_CONFIGS[ $key ] = get_option( $key );
 }
 
 /**
  * 返回指定配置
  * */
-function nicen_rrweb_config( $key = '' ) {
-	global $nicen_rrweb_CONFIGS;
+function nicen_replay_config( $key = '' ) {
+	global $nicen_replay_CONFIGS;
 	if ( empty( $key ) ) {
-		return $nicen_rrweb_CONFIGS;
+		return $nicen_replay_CONFIGS;
 	} else {
-		return $nicen_rrweb_CONFIGS[ $key ];
+		return $nicen_replay_CONFIGS[ $key ];
 	}
 }
 
@@ -34,7 +34,7 @@ function nicen_rrweb_config( $key = '' ) {
  * @return false|string
  * IP归属地查询
  */
-function nicen_rrweb_ip( $ip ) {
+function nicen_replay_ip( $ip ) {
 
 	$json = json_decode( file_get_contents( "http://mini.nicen.cn/ip?query=" . $ip ), true );
 

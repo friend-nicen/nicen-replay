@@ -4,19 +4,33 @@
 /**
  * 后台所有表单
  * */
-const PLUGIN_nicen_rrweb = [
+const PLUGIN_nicen_replay = [
 	[
-		"id"         => "nicen_rrweb_plugin",//主题后台设置字段
+		"id"         => "nicen_replay_plugin",//主题后台设置字段
 		"menu_title" => '用户行为回放',
 		'page_title' => '用户行为回放',
-		'callback'   => 'nicen_rrweb_setting_load',
+		'callback'   => 'nicen_replay_setting_load',
 		'capablity'  => 'manage_options',
 		"sections"   => [
 			[
-				"id"       => "nicen_rrweb_player",
+				"id"       => "nicen_replay_player",
+				'title'    => '回放',
+				'callback' => [
+					"render" => "nicen_replay_player"
+				],
+			],
+			[
+				"id"       => "nicen_replay_update",
+				'title'    => '插件升级',
+				'callback' => [
+					"render" => "nicen_replay_update"
+				],
+			],
+			[
+				"id"       => "nicen_replay_vip",
 				'title'    => 'Pro版',
 				'callback' => [
-					"render" => "nicen_rrweb_player"
+					"render" => "nicen_replay_vip"
 				],
 			]
 		]
@@ -28,7 +42,7 @@ const PLUGIN_nicen_rrweb = [
  * 主题所有配置
  * 键=>默认值
  * */
-define( 'nicen_rrweb_CONFIG', [
+define( 'nicen_replay_CONFIG', [
 
 ] );
 

@@ -2257,7 +2257,7 @@ var Ko = $r((zo, Ze) => {
         return (t[r.toLowerCase()] || t[n]) && (o ? i = o(i) : i = "*".repeat(i.length)), i;
     }
 
-    var Vt = "__rrweb_original__";
+    var Vt = "__replay_original__";
 
     function Bs(e) {
         var t = e.getContext("2d");
@@ -2912,7 +2912,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
                 };
             const n = e[t], s = r(n);
             return typeof s == "function" && (s.prototype = s.prototype || {}, Object.defineProperties(s, {
-                __rrweb_original__: {
+                __replay_original__: {
                     enumerable: !1,
                     value: n
                 }
@@ -3936,7 +3936,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
         }
 
         handleMessage(t) {
-            if (t.data.type === "rrweb") {
+            if (t.data.type === "replay") {
                 if (!t.source)
                     return;
                 const n = this.crossOriginIframeMap.get(t.source);
@@ -4692,7 +4692,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
                 t == null || t(A(k), z);
             else if (ne) {
                 const V = {
-                    type: "rrweb",
+                    type: "replay",
                     event: A(k),
                     isCheckout: z
                 };
@@ -4983,6 +4983,6 @@ or you can use record.mirror to access the mirror instance during recording.`;
             }
         })();
     };
-    window.rrwebInit = Ho;
+    window.replayInit = Ho;
 });
 Ko();

@@ -6,30 +6,30 @@
  */
 
 /* 添加rest_api_init动作钩子，在WordPress初始化REST API时注册自定义路由 */
-add_action( 'rest_api_init', 'nicen_rrweb_rest_register_routes' );
+add_action( 'rest_api_init', 'nicen_replay_rest_register_routes' );
 
 /* 定义注册路由的函数 */
-function nicen_rrweb_rest_register_routes() {
+function nicen_replay_rest_register_routes() {
 
 
 	register_rest_route( 'api/v4', '/ip', array(
 		'methods'  => 'GET', // 指定允许的方法，这里以GET为例
-		'callback' => 'nicen_rrweb_getip', // 指定处理请求的回调函数
+		'callback' => 'nicen_replay_getip', // 指定处理请求的回调函数
 	) );
 
 	register_rest_route( 'api/v4', '/event', array(
 		'methods'  => 'POST', // 指定允许的方法，这里以GET为例
-		'callback' => 'nicen_rrweb_event', // 指定处理请求的回调函数
+		'callback' => 'nicen_replay_event', // 指定处理请求的回调函数
 	) );
 
 	register_rest_route( 'api/v5', '/events', array(
 		'methods'  => 'POST', // 指定允许的方法，这里以GET为例
-		'callback' => 'nicen_rrweb_get_all_logs', // 指定处理请求的回调函数
+		'callback' => 'nicen_replay_get_all_logs', // 指定处理请求的回调函数
 	) );
 
 	register_rest_route( 'api/v5', '/get', array(
 		'methods'  => 'POST', // 指定允许的方法，这里以GET为例
-		'callback' => 'nicen_rrweb_get_event', // 指定处理请求的回调函数
+		'callback' => 'nicen_replay_get_event', // 指定处理请求的回调函数
 	) );
 }
 
@@ -37,7 +37,7 @@ function nicen_rrweb_rest_register_routes() {
  * @return WP_Error|WP_HTTP_Response|WP_REST_Response
  * 获取用户的IP
  */
-function nicen_rrweb_getip() {
+function nicen_replay_getip() {
 
 	$ip = $_SERVER['REMOTE_ADDR'];
 
@@ -66,7 +66,7 @@ function nicen_rrweb_getip() {
  * @return WP_Error|WP_HTTP_Response|WP_REST_Response
  * 获取用户的IP
  */
-function nicen_rrweb_event() {
+function nicen_replay_event() {
 
 	/* 读取JSON参数 */
 	$json = json_decode( file_get_contents( "php://input" ), true );
@@ -81,7 +81,7 @@ function nicen_rrweb_event() {
 	}
 
 	/* 判断数据文件是否存在 */
-	$root = nicen_rrweb_path . "events";
+	$root = nicen_replay_path . "events";
 	if ( ! file_exists( $root ) || ! is_writable( $root ) ) {
 		return rest_ensure_response( [
 			"code"   => 0,
@@ -129,7 +129,7 @@ function nicen_rrweb_event() {
  *
  * @return WP_REST_Response
  */
-function nicen_rrweb_get_all_logs() {
+function nicen_replay_get_all_logs() {
 
 	/* 读取请求体中的JSON参数 */
 	$json = json_decode( file_get_contents( "php://input" ), true );
@@ -139,7 +139,7 @@ function nicen_rrweb_get_all_logs() {
 	$date = ! empty( $json['date'] ) ? sanitize_text_field( $json['date'] ) : date( 'Y-m-d' );
 
 	/* 构造文件路径 */
-	$glob = $ip ? nicen_rrweb_path . 'events/' . $date . '/' . $ip . '*' : nicen_rrweb_path . 'events/' . $date . '/*.*';
+	$glob = $ip ? nicen_replay_path . 'events/' . $date . '/' . $ip . '*' : nicen_replay_path . 'events/' . $date . '/*.*';
 
 
 	/* 获取匹配的文件列表 */
@@ -156,7 +156,7 @@ function nicen_rrweb_get_all_logs() {
 			/* 添加到数据数组 */
 			$data[] = [
 				'ip'   => $info[0],
-				'city' => nicen_rrweb_ip( $info[0] ), // 需要实现Common::ip()方法
+				'city' => nicen_replay_ip( $info[0] ), // 需要实现Common::ip()方法
 				'time' => filemtime( $file ),
 				'date' => $date,
 				'size' => $size,
@@ -185,7 +185,7 @@ function nicen_rrweb_get_all_logs() {
  *
  * @return WP_REST_Response
  */
-function nicen_rrweb_get_event() {
+function nicen_replay_get_event() {
 	/* 读取请求体中的JSON参数 */
 	$json = json_decode( file_get_contents( "php://input" ), true );
 
@@ -194,7 +194,7 @@ function nicen_rrweb_get_event() {
 	$file = sanitize_text_field( $json['file'] );
 
 	/* 构造文件路径 */
-	$file_path = nicen_rrweb_path . 'events/' . $date . '/' . $file;
+	$file_path = nicen_replay_path . 'events/' . $date . '/' . $file;
 
 	/* 检查文件是否存在 */
 	if ( ! file_exists( $file_path ) ) {
