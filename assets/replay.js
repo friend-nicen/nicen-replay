@@ -6,7 +6,7 @@ var Ko = $r((zo, Ze) => {
         };
     }
 
-    const {toString: Qr} = Object.prototype, {getPrototypeOf: Ct} = Object, Ye = /* @__PURE__ */ ((e) => (t) => {
+    const {toString: Qr} = Object.prototype, {getPrototypeOf: St} = Object, Ye = /* @__PURE__ */ ((e) => (t) => {
             const r = Qr.call(t);
             return e[r] || (e[r] = r.slice(8, -1).toLowerCase());
         })(/* @__PURE__ */ Object.create(null)), de = (e) => (e = e.toLowerCase(), (t) => Ye(t) === e),
@@ -27,7 +27,7 @@ var Ko = $r((zo, Ze) => {
         rn = (e) => e === !0 || e === !1, We = (e) => {
             if (Ye(e) !== "object")
                 return !1;
-            const t = Ct(e);
+            const t = St(e);
             return (t === null || t === Object.prototype || Object.getPrototypeOf(t) === null) && !(Symbol.toStringTag in e) && !(Symbol.iterator in e);
         }, nn = de("Date"), sn = de("File"), on = de("Blob"), an = de("FileList"), cn = (e) => Qe(e) && le(e.pipe),
         ln = (e) => {
@@ -65,10 +65,10 @@ var Ko = $r((zo, Ze) => {
     const me = typeof globalThis < "u" ? globalThis : typeof self < "u" ? self : typeof window < "u" ? window : global,
         or = (e) => !Ne(e) && e !== me;
 
-    function lt() {
+    function ut() {
         const {caseless: e} = or(this) && this || {}, t = {}, r = (n, s) => {
             const o = e && sr(t, s) || s;
-            We(t[o]) && We(n) ? t[o] = lt(t[o], n) : We(n) ? t[o] = lt({}, n) : Te(n) ? t[o] = n.slice() : t[o] = n;
+            We(t[o]) && We(n) ? t[o] = ut(t[o], n) : We(n) ? t[o] = ut({}, n) : Te(n) ? t[o] = n.slice() : t[o] = n;
         };
         for (let n = 0, s = arguments.length; n < s; n++)
             arguments[n] && De(arguments[n], r);
@@ -88,7 +88,7 @@ var Ko = $r((zo, Ze) => {
             do {
                 for (s = Object.getOwnPropertyNames(e), o = s.length; o-- > 0;)
                     i = s[o], (!n || n(i, e, t)) && !a[i] && (t[i] = e[i], a[i] = !0);
-                e = r !== !1 && Ct(e);
+                e = r !== !1 && St(e);
             } while (e && (!r || r(e, t)) && e !== Object.prototype);
             return t;
         }, Sn = (e, t, r) => {
@@ -104,7 +104,7 @@ var Ko = $r((zo, Ze) => {
             for (; t-- > 0;)
                 r[t] = e[t];
             return r;
-        }, An = /* @__PURE__ */ ((e) => (t) => e && t instanceof e)(typeof Uint8Array < "u" && Ct(Uint8Array)),
+        }, An = /* @__PURE__ */ ((e) => (t) => e && t instanceof e)(typeof Uint8Array < "u" && St(Uint8Array)),
         vn = (e, t) => {
             const n = (e && e[Symbol.iterator]).call(e);
             let s;
@@ -123,7 +123,7 @@ var Ko = $r((zo, Ze) => {
             function (r, n, s) {
                 return n.toUpperCase() + s;
             }
-        ), Tt = (({hasOwnProperty: e}) => (t, r) => e.call(t, r))(Object.prototype), On = de("RegExp"), ir = (e, t) => {
+        ), Ot = (({hasOwnProperty: e}) => (t, r) => e.call(t, r))(Object.prototype), On = de("RegExp"), ir = (e, t) => {
             const r = Object.getOwnPropertyDescriptors(e), n = {};
             De(r, (s, o) => {
                 let i;
@@ -153,10 +153,10 @@ var Ko = $r((zo, Ze) => {
             return Te(e) ? n(e) : n(String(e).split(t)), r;
         }, Mn = () => {
         }, Nn = (e, t) => e != null && Number.isFinite(e = +e) ? e : t, nt = "abcdefghijklmnopqrstuvwxyz",
-        Ot = "0123456789", ar = {
-            DIGIT: Ot,
+        kt = "0123456789", ar = {
+            DIGIT: kt,
             ALPHA: nt,
-            ALPHA_DIGIT: nt + nt.toUpperCase() + Ot
+            ALPHA_DIGIT: nt + nt.toUpperCase() + kt
         }, Fn = (e = 16, t = ar.ALPHA_DIGIT) => {
             let r = "";
             const {length: n} = t;
@@ -221,7 +221,7 @@ var Ko = $r((zo, Ze) => {
             isTypedArray: An,
             isFileList: an,
             forEach: De,
-            merge: lt,
+            merge: ut,
             extend: gn,
             trim: mn,
             stripBOM: yn,
@@ -234,8 +234,8 @@ var Ko = $r((zo, Ze) => {
             forEachEntry: vn,
             matchAll: wn,
             isHTMLForm: Rn,
-            hasOwnProperty: Tt,
-            hasOwnProp: Tt,
+            hasOwnProperty: Ot,
+            hasOwnProp: Ot,
             // an alias to avoid ESLint no-prototype-builtins detection
             reduceDescriptors: ir,
             freezeMethods: kn,
@@ -309,7 +309,7 @@ var Ko = $r((zo, Ze) => {
     };
     const Un = null;
 
-    function ut(e) {
+    function dt(e) {
         return h.isPlainObject(e) || h.isArray(e);
     }
 
@@ -317,14 +317,14 @@ var Ko = $r((zo, Ze) => {
         return h.endsWith(e, "[]") ? e.slice(0, -2) : e;
     }
 
-    function kt(e, t, r) {
+    function Et(e, t, r) {
         return e ? e.concat(t).map(function (s, o) {
             return s = dr(s), !r && o ? "[" + s + "]" : s;
         }).join(r ? "." : "") : t;
     }
 
     function Wn(e) {
-        return h.isArray(e) && !e.some(ut);
+        return h.isArray(e) && !e.some(dt);
     }
 
     const Pn = h.toFlatObject(h, {}, null, function (t) {
@@ -364,18 +364,18 @@ var Ko = $r((zo, Ze) => {
                     return g = dr(g), v.forEach(function (C, N) {
                         !(h.isUndefined(C) || C === null) && t.append(
                             // eslint-disable-next-line no-nested-ternary
-                            i === !0 ? kt([g], N, o) : i === null ? g : g + "[]",
+                            i === !0 ? Et([g], N, o) : i === null ? g : g + "[]",
                             c(C)
                         );
                     }), !1;
             }
-            return ut(f) ? !0 : (t.append(kt(y, g, o), c(f)), !1);
+            return dt(f) ? !0 : (t.append(Et(y, g, o), c(f)), !1);
         }
 
         const d = [], p = Object.assign(Pn, {
             defaultVisitor: u,
             convertValue: c,
-            isVisitable: ut
+            isVisitable: dt
         });
 
         function m(f, g) {
@@ -399,7 +399,7 @@ var Ko = $r((zo, Ze) => {
         return m(e), t;
     }
 
-    function Et(e) {
+    function Mt(e) {
         const t = {
             "!": "%21",
             "'": "%27",
@@ -414,18 +414,18 @@ var Ko = $r((zo, Ze) => {
         });
     }
 
-    function St(e, t) {
+    function bt(e, t) {
         this._pairs = [], e && Xe(e, this, t);
     }
 
-    const fr = St.prototype;
+    const fr = bt.prototype;
     fr.append = function (t, r) {
         this._pairs.push([t, r]);
     };
     fr.toString = function (t) {
         const r = t ? function (n) {
-            return t.call(this, n, Et);
-        } : Et;
+            return t.call(this, n, Mt);
+        } : Mt;
         return this._pairs.map(function (s) {
             return r(s[0]) + "=" + r(s[1]);
         }, "").join("&");
@@ -440,14 +440,14 @@ var Ko = $r((zo, Ze) => {
             return e;
         const n = r && r.encode || Gn, s = r && r.serialize;
         let o;
-        if (s ? o = s(t, r) : o = h.isURLSearchParams(t) ? t.toString() : new St(t, r).toString(n), o) {
+        if (s ? o = s(t, r) : o = h.isURLSearchParams(t) ? t.toString() : new bt(t, r).toString(n), o) {
             const i = e.indexOf("#");
             i !== -1 && (e = e.slice(0, i)), e += (e.indexOf("?") === -1 ? "?" : "&") + o;
         }
         return e;
     }
 
-    class Mt {
+    class Nt {
         constructor() {
             this.handlers = [];
         }
@@ -510,7 +510,7 @@ var Ko = $r((zo, Ze) => {
             silentJSONParsing: !0,
             forcedJSONParsing: !0,
             clarifyTimeoutError: !1
-        }, Vn = typeof URLSearchParams < "u" ? URLSearchParams : St, Zn = typeof FormData < "u" ? FormData : null,
+        }, Vn = typeof URLSearchParams < "u" ? URLSearchParams : bt, Zn = typeof FormData < "u" ? FormData : null,
         Hn = typeof Blob < "u" ? Blob : null, Kn = {
             isBrowser: !0,
             classes: {
@@ -519,17 +519,17 @@ var Ko = $r((zo, Ze) => {
                 Blob: Hn
             },
             protocols: ["http", "https", "file", "blob", "url", "data"]
-        }, bt = typeof window < "u" && typeof document < "u", dt = typeof navigator == "object" && navigator || void 0,
-        jn = bt && (!dt || ["ReactNative", "NativeScript", "NS"].indexOf(dt.product) < 0),
+        }, At = typeof window < "u" && typeof document < "u", ft = typeof navigator == "object" && navigator || void 0,
+        jn = At && (!ft || ["ReactNative", "NativeScript", "NS"].indexOf(ft.product) < 0),
         zn = typeof WorkerGlobalScope < "u" && // eslint-disable-next-line no-undef
             self instanceof WorkerGlobalScope && typeof self.importScripts == "function",
-        Jn = bt && window.location.href || "http://localhost",
+        Jn = At && window.location.href || "http://localhost",
         qn = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
             __proto__: null,
-            hasBrowserEnv: bt,
+            hasBrowserEnv: At,
             hasStandardBrowserEnv: jn,
             hasStandardBrowserWebWorkerEnv: zn,
-            navigator: dt,
+            navigator: ft,
             origin: Jn
         }, Symbol.toStringTag, {value: "Module"})), ae = {
             ...qn,
@@ -681,7 +681,7 @@ var Ko = $r((zo, Ze) => {
 `).forEach(function (i) {
             s = i.indexOf(":"), r = i.substring(0, s).trim().toLowerCase(), n = i.substring(s + 1).trim(), !(!r || t[r] && es[r]) && (r === "set-cookie" ? t[r] ? t[r].push(n) : t[r] = [n] : t[r] = t[r] ? t[r] + ", " + n : n);
         }), t;
-    }, Nt = Symbol("internals");
+    }, Ft = Symbol("internals");
 
     function ke(e) {
         return e && String(e).trim().toLowerCase();
@@ -731,32 +731,6 @@ var Ko = $r((zo, Ze) => {
     class ce {
         constructor(t) {
             t && this.set(t);
-        }
-
-        get [Symbol.toStringTag]() {
-            return "AxiosHeaders";
-        }
-
-        static from(t) {
-            return t instanceof this ? t : new this(t);
-        }
-
-        static concat(t, ...r) {
-            const n = new this(t);
-            return r.forEach((s) => n.set(s)), n;
-        }
-
-        static accessor(t) {
-            const n = (this[Nt] = this[Nt] = {
-                accessors: {}
-            }).accessors, s = this.prototype;
-
-            function o(i) {
-                const a = ke(i);
-                n[a] || (os(s, i), n[a] = !0);
-            }
-
-            return h.isArray(t) ? t.forEach(o) : o(t), this;
         }
 
         set(t, r, n) {
@@ -865,6 +839,32 @@ var Ko = $r((zo, Ze) => {
             return Object.entries(this.toJSON()).map(([t, r]) => t + ": " + r).join(`
 `);
         }
+
+        get [Symbol.toStringTag]() {
+            return "AxiosHeaders";
+        }
+
+        static from(t) {
+            return t instanceof this ? t : new this(t);
+        }
+
+        static concat(t, ...r) {
+            const n = new this(t);
+            return r.forEach((s) => n.set(s)), n;
+        }
+
+        static accessor(t) {
+            const n = (this[Ft] = this[Ft] = {
+                accessors: {}
+            }).accessors, s = this.prototype;
+
+            function o(i) {
+                const a = ke(i);
+                n[a] || (os(s, i), n[a] = !0);
+            }
+
+            return h.isArray(t) ? t.forEach(o) : o(t), this;
+        }
     }
 
     ce.accessor(["Content-Type", "Content-Length", "Accept", "Accept-Encoding", "User-Agent", "Authorization"]);
@@ -964,14 +964,14 @@ var Ko = $r((zo, Ze) => {
             };
             e(d);
         }, r);
-    }, Ft = (e, t) => {
+    }, xt = (e, t) => {
         const r = e != null;
         return [(n) => t[0]({
             lengthComputable: r,
             total: e,
             loaded: n
         }), t[1]];
-    }, xt = (e) => (...t) => h.asap(() => e(...t)), ls = ae.hasStandardBrowserEnv ? (
+    }, Dt = (e) => (...t) => h.asap(() => e(...t)), ls = ae.hasStandardBrowserEnv ? (
         // Standard browser envs have full support of the APIs needed to test
         // whether the request URL is of the same origin as current location.
         function () {
@@ -1044,7 +1044,7 @@ var Ko = $r((zo, Ze) => {
         return e && !ds(t) ? fs(e, t) : t;
     }
 
-    const Dt = (e) => e instanceof ce ? {...e} : e;
+    const Lt = (e) => e instanceof ce ? {...e} : e;
 
     function Ie(e, t) {
         t = t || {};
@@ -1109,7 +1109,7 @@ var Ko = $r((zo, Ze) => {
             socketPath: i,
             responseEncoding: i,
             validateStatus: a,
-            headers: (c, u) => s(Dt(c), Dt(u), !0)
+            headers: (c, u) => s(Lt(c), Lt(u), !0)
         };
         return h.forEach(Object.keys(Object.assign({}, e, t)), function (u) {
             const d = l[u] || s, p = d(e[u], t[u], u);
@@ -1250,7 +1250,7 @@ var Ko = $r((zo, Ze) => {
             } finally {
                 await t.cancel();
             }
-        }, Lt = (e, t, r, n) => {
+        }, _t = (e, t, r, n) => {
             const s = ys(e, t);
             let o = 0, i, a = (l) => {
                 i || (i = !0, n && n(l));
@@ -1298,8 +1298,8 @@ var Ko = $r((zo, Ze) => {
                 }
             }).headers.has("Content-Type");
             return e && !t;
-        }), _t = 64 * 1024, ft = Sr && br(() => h.isReadableStream(new Response("").body)), Ke = {
-            stream: ft && ((e) => e.body)
+        }), Bt = 64 * 1024, ht = Sr && br(() => h.isReadableStream(new Response("").body)), Ke = {
+            stream: ht && ((e) => e.body)
         };
     et && ((e) => {
         ["text", "arrayBuffer", "blob", "formData", "stream"].forEach((t) => {
@@ -1354,11 +1354,11 @@ var Ko = $r((zo, Ze) => {
                     duplex: "half"
                 }), B;
                 if (h.isFormData(n) && (B = D.headers.get("content-type")) && u.setContentType(B), D.body) {
-                    const [Z, L] = Ft(
+                    const [Z, L] = xt(
                         y,
-                        He(xt(l))
+                        He(Dt(l))
                     );
-                    n = Lt(D.body, _t, Z, L);
+                    n = _t(D.body, Bt, Z, L);
                 }
             }
             h.isString(d) || (d = d ? "include" : "omit");
@@ -1373,18 +1373,18 @@ var Ko = $r((zo, Ze) => {
                 credentials: v ? d : void 0
             });
             let I = await fetch(f);
-            const C = ft && (c === "stream" || c === "response");
-            if (ft && (a || C && g)) {
+            const C = ht && (c === "stream" || c === "response");
+            if (ht && (a || C && g)) {
                 const D = {};
                 ["status", "statusText", "headers"].forEach((J) => {
                     D[J] = I[J];
                 });
-                const B = h.toFiniteNumber(I.headers.get("content-length")), [Z, L] = a && Ft(
+                const B = h.toFiniteNumber(I.headers.get("content-length")), [Z, L] = a && xt(
                     B,
-                    He(xt(a), !0)
+                    He(Dt(a), !0)
                 ) || [];
                 I = new Response(
-                    Lt(I.body, _t, Z, () => {
+                    _t(I.body, Bt, Z, () => {
                         L && L(), g && g();
                     }),
                     D
@@ -1410,12 +1410,12 @@ var Ko = $r((zo, Ze) => {
                 }
             ) : M.from(v, v && v.code, e, f);
         }
-    }), ht = {
+    }), pt = {
         http: Un,
         xhr: ps,
         fetch: vs
     };
-    h.forEach(ht, (e, t) => {
+    h.forEach(pt, (e, t) => {
         if (e) {
             try {
                 Object.defineProperty(e, "name", {value: t});
@@ -1424,7 +1424,7 @@ var Ko = $r((zo, Ze) => {
             Object.defineProperty(e, "adapterName", {value: t});
         }
     });
-    const Bt = (e) => `- ${e}`, ws = (e) => h.isFunction(e) || e === null || e === !1, Ar = {
+    const Ut = (e) => `- ${e}`, ws = (e) => h.isFunction(e) || e === null || e === !1, Ar = {
         getAdapter: (e) => {
             e = h.isArray(e) ? e : [e];
             const {length: t} = e;
@@ -1433,7 +1433,7 @@ var Ko = $r((zo, Ze) => {
             for (let o = 0; o < t; o++) {
                 r = e[o];
                 let i;
-                if (n = r, !ws(r) && (n = ht[(i = String(r)).toLowerCase()], n === void 0))
+                if (n = r, !ws(r) && (n = pt[(i = String(r)).toLowerCase()], n === void 0))
                     throw new M(`Unknown adapter '${i}'`);
                 if (n)
                     break;
@@ -1444,8 +1444,8 @@ var Ko = $r((zo, Ze) => {
                     ([a, l]) => `adapter ${a} ` + (l === !1 ? "is not supported by the environment" : "is not available in the build")
                 );
                 let i = t ? o.length > 1 ? `since :
-` + o.map(Bt).join(`
-`) : " " + Bt(o[0]) : "as no adapter specified";
+` + o.map(Ut).join(`
+`) : " " + Ut(o[0]) : "as no adapter specified";
                 throw new M(
                     "There is no suitable adapter to dispatch the request " + i,
                     "ERR_NOT_SUPPORT"
@@ -1453,7 +1453,7 @@ var Ko = $r((zo, Ze) => {
             }
             return n;
         },
-        adapters: ht
+        adapters: pt
     };
 
     function it(e) {
@@ -1461,7 +1461,7 @@ var Ko = $r((zo, Ze) => {
             throw new Oe(null, e);
     }
 
-    function Ut(e) {
+    function Wt(e) {
         return it(e), e.headers = ce.from(e.headers), e.data = ot.call(
             e,
             e.transformRequest
@@ -1480,14 +1480,14 @@ var Ko = $r((zo, Ze) => {
         });
     }
 
-    const vr = "1.7.7", At = {};
+    const vr = "1.7.7", vt = {};
     ["object", "boolean", "number", "function", "string", "symbol"].forEach((e, t) => {
-        At[e] = function (n) {
+        vt[e] = function (n) {
             return typeof n === e || "a" + (t < 1 ? "n " : " ") + e;
         };
     });
-    const Wt = {};
-    At.transitional = function (t, r, n) {
+    const Pt = {};
+    vt.transitional = function (t, r, n) {
         function s(o, i) {
             return "[Axios v" + vr + "] Transitional option '" + o + "'" + i + (n ? ". " + n : "");
         }
@@ -1498,7 +1498,7 @@ var Ko = $r((zo, Ze) => {
                     s(i, " has been removed" + (r ? " in " + r : "")),
                     M.ERR_DEPRECATED
                 );
-            return r && !Wt[i] && (Wt[i] = !0, console.warn(
+            return r && !Pt[i] && (Pt[i] = !0, console.warn(
                 s(
                     i,
                     " has been deprecated since v" + r + " and will be removed in the near future"
@@ -1525,16 +1525,16 @@ var Ko = $r((zo, Ze) => {
         }
     }
 
-    const pt = {
+    const mt = {
         assertOptions: Rs,
-        validators: At
-    }, he = pt.validators;
+        validators: vt
+    }, he = mt.validators;
 
     class ye {
         constructor(t) {
             this.defaults = t, this.interceptors = {
-                request: new Mt(),
-                response: new Mt()
+                request: new Nt(),
+                response: new Nt()
             };
         }
 
@@ -1567,13 +1567,13 @@ var Ko = $r((zo, Ze) => {
         _request(t, r) {
             typeof t == "string" ? (r = r || {}, r.url = t) : r = t || {}, r = Ie(this.defaults, r);
             const {transitional: n, paramsSerializer: s, headers: o} = r;
-            n !== void 0 && pt.assertOptions(n, {
+            n !== void 0 && mt.assertOptions(n, {
                 silentJSONParsing: he.transitional(he.boolean),
                 forcedJSONParsing: he.transitional(he.boolean),
                 clarifyTimeoutError: he.transitional(he.boolean)
             }, !1), s != null && (h.isFunction(s) ? r.paramsSerializer = {
                 serialize: s
-            } : pt.assertOptions(s, {
+            } : mt.assertOptions(s, {
                 encode: he.function,
                 serialize: he.function
             }, !0)), r.method = (r.method || this.defaults.method || "get").toLowerCase();
@@ -1598,7 +1598,7 @@ var Ko = $r((zo, Ze) => {
             });
             let u, d = 0, p;
             if (!l) {
-                const f = [Ut.bind(this), void 0];
+                const f = [Wt.bind(this), void 0];
                 for (f.unshift.apply(f, a), f.push.apply(f, c), p = f.length, u = Promise.resolve(r); d < p;)
                     u = u.then(f[d++], f[d++]);
                 return u;
@@ -1615,7 +1615,7 @@ var Ko = $r((zo, Ze) => {
                 }
             }
             try {
-                u = Ut.call(this, m);
+                u = Wt.call(this, m);
             } catch (f) {
                 return Promise.reject(f);
             }
@@ -1657,7 +1657,7 @@ var Ko = $r((zo, Ze) => {
         ye.prototype[t] = r(), ye.prototype[t + "Form"] = r(!0);
     });
 
-    class vt {
+    class wt {
         constructor(t) {
             if (typeof t != "function")
                 throw new TypeError("executor must be a function.");
@@ -1683,20 +1683,6 @@ var Ko = $r((zo, Ze) => {
             }, t(function (o, i, a) {
                 n.reason || (n.reason = new Oe(o, i, a), r(n.reason));
             });
-        }
-
-        /**
-         * Returns an object that contains a new `CancelToken` and a function that, when called,
-         * cancels the `CancelToken`.
-         */
-        static source() {
-            let t;
-            return {
-                token: new vt(function (s) {
-                    t = s;
-                }),
-                cancel: t
-            };
         }
 
         /**
@@ -1734,6 +1720,20 @@ var Ko = $r((zo, Ze) => {
             };
             return this.subscribe(r), t.signal.unsubscribe = () => this.unsubscribe(r), t.signal;
         }
+
+        /**
+         * Returns an object that contains a new `CancelToken` and a function that, when called,
+         * cancels the `CancelToken`.
+         */
+        static source() {
+            let t;
+            return {
+                token: new wt(function (s) {
+                    t = s;
+                }),
+                cancel: t
+            };
+        }
     }
 
     function Ts(e) {
@@ -1746,7 +1746,7 @@ var Ko = $r((zo, Ze) => {
         return h.isObject(e) && e.isAxiosError === !0;
     }
 
-    const mt = {
+    const gt = {
         Continue: 100,
         SwitchingProtocols: 101,
         Processing: 102,
@@ -1811,8 +1811,8 @@ var Ko = $r((zo, Ze) => {
         NotExtended: 510,
         NetworkAuthenticationRequired: 511
     };
-    Object.entries(mt).forEach(([e, t]) => {
-        mt[t] = e;
+    Object.entries(gt).forEach(([e, t]) => {
+        gt[t] = e;
     });
 
     function wr(e) {
@@ -1825,7 +1825,7 @@ var Ko = $r((zo, Ze) => {
     const Y = wr(Le);
     Y.Axios = ye;
     Y.CanceledError = Oe;
-    Y.CancelToken = vt;
+    Y.CancelToken = wt;
     Y.isCancel = gr;
     Y.VERSION = vr;
     Y.toFormData = Xe;
@@ -1840,11 +1840,11 @@ var Ko = $r((zo, Ze) => {
     Y.AxiosHeaders = ce;
     Y.formToJSON = (e) => mr(h.isHTMLForm(e) ? new FormData(e) : e);
     Y.getAdapter = Ar.getAdapter;
-    Y.HttpStatusCode = mt;
+    Y.HttpStatusCode = gt;
     Y.default = Y;
-    const Pt = window.base_url, Gt = {
-        ip: `${Pt}/wp-json/api/v4/ip`,
-        event: `${Pt}/wp-json/api/v4/event`
+    const Gt = window.base_url, at = {
+        ip: `${Gt}/?nicen_replay_getip=1`,
+        event: `${Gt}/?nicen_replay_event=1`
     };
     var ks = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
 
@@ -2184,7 +2184,7 @@ var Ko = $r((zo, Ze) => {
         return e.includes(" background-clip: text;") && !e.includes(" -webkit-background-clip: text;") && (e = e.replace(" background-clip: text;", " -webkit-background-clip: text; background-clip: text;")), e;
     }
 
-    function gt(e) {
+    function yt(e) {
         try {
             var t = e.rules || e.cssRules;
             return t ? Ds(Array.from(t).map(Tr).join("")) : null;
@@ -2197,7 +2197,7 @@ var Ko = $r((zo, Ze) => {
         var t = e.cssText;
         if (Ls(e))
             try {
-                t = gt(e.styleSheet) || t;
+                t = yt(e.styleSheet) || t;
             } catch {
             }
         return t;
@@ -2252,12 +2252,12 @@ var Ko = $r((zo, Ze) => {
         return new Or();
     }
 
-    function wt(e) {
+    function Rt(e) {
         var t = e.maskInputOptions, r = e.tagName, n = e.type, s = e.value, o = e.maskInputFn, i = s || "";
         return (t[r.toLowerCase()] || t[n]) && (o ? i = o(i) : i = "*".repeat(i.length)), i;
     }
 
-    var Vt = "__replay_original__";
+    var Vt = "__rrweb_original__";
 
     function Bs(e) {
         var t = e.getContext("2d");
@@ -2369,13 +2369,13 @@ var Ko = $r((zo, Ze) => {
         return !!(e.tagName === "svg" || e.ownerSVGElement);
     }
 
-    function Rt() {
+    function Tt() {
         var e = document.createElement("a");
         return e.href = "", e.href;
     }
 
     function Er(e, t, r, n) {
-        return r === "src" || r === "href" && n && !(t === "use" && n[0] === "#") || r === "xlink:href" && n && n[0] !== "#" || r === "background" && n && (t === "table" || t === "td" || t === "th") ? be(e, n) : r === "srcset" && n ? Js(e, n) : r === "style" && n ? je(n, Rt()) : t === "object" && r === "data" && n ? be(e, n) : n;
+        return r === "src" || r === "href" && n && !(t === "use" && n[0] === "#") || r === "xlink:href" && n && n[0] !== "#" || r === "background" && n && (t === "table" || t === "td" || t === "th") ? be(e, n) : r === "srcset" && n ? Js(e, n) : r === "style" && n ? je(n, Tt()) : t === "object" && r === "data" && n ? be(e, n) : n;
     }
 
     function Ys(e, t, r) {
@@ -2537,7 +2537,7 @@ var Ko = $r((zo, Ze) => {
             } catch (d) {
                 console.warn("Cannot get CSS styles from text's parentNode. Error: ".concat(d), e);
             }
-            l = je(l, Rt());
+            l = je(l, Tt());
         }
         return u && (l = "SCRIPT_PLACEHOLDER"), !c && !u && l && Mr(e, n, s) && (l = o ? o(l) : l.replace(/[\S]/g, "*")), {
             type: te.Text,
@@ -2556,15 +2556,15 @@ var Ko = $r((zo, Ze) => {
             var Z = Array.from(r.styleSheets).find(function (O) {
                 return O.href === e.href;
             }), L = null;
-            Z && (L = gt(Z)), L && (delete C.rel, delete C.href, C._cssText = je(L, Z.href));
+            Z && (L = yt(Z)), L && (delete C.rel, delete C.href, C._cssText = je(L, Z.href));
         }
         if (I === "style" && e.sheet && !(e.innerText || e.textContent || "").trim().length) {
-            var L = gt(e.sheet);
-            L && (C._cssText = je(L, Rt()));
+            var L = yt(e.sheet);
+            L && (C._cssText = je(L, Tt()));
         }
         if (I === "input" || I === "textarea" || I === "select") {
             var J = e.value, W = e.checked;
-            C.type !== "radio" && C.type !== "checkbox" && C.type !== "submit" && C.type !== "button" && J ? C.value = wt({
+            C.type !== "radio" && C.type !== "checkbox" && C.type !== "submit" && C.type !== "button" && J ? C.value = Rt({
                 type: C.type,
                 tagName: I,
                 value: J,
@@ -2912,7 +2912,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
                 };
             const n = e[t], s = r(n);
             return typeof s == "function" && (s.prototype = s.prototype || {}, Object.defineProperties(s, {
-                __replay_original__: {
+                __rrweb_original__: {
                     enumerable: !1,
                     value: n
                 }
@@ -2951,7 +2951,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
         return t.getId(e) !== -1;
     }
 
-    function at(e, t) {
+    function ct(e, t) {
         return t.getId(e) === Fe;
     }
 
@@ -3027,7 +3027,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
 
     var P = /* @__PURE__ */ ((e) => (e[e.DomContentLoaded = 0] = "DomContentLoaded", e[e.Load = 1] = "Load", e[e.FullSnapshot = 2] = "FullSnapshot", e[e.IncrementalSnapshot = 3] = "IncrementalSnapshot", e[e.Meta = 4] = "Meta", e[e.Custom = 5] = "Custom", e[e.Plugin = 6] = "Plugin", e))(P || {}),
         U = /* @__PURE__ */ ((e) => (e[e.Mutation = 0] = "Mutation", e[e.MouseMove = 1] = "MouseMove", e[e.MouseInteraction = 2] = "MouseInteraction", e[e.Scroll = 3] = "Scroll", e[e.ViewportResize = 4] = "ViewportResize", e[e.Input = 5] = "Input", e[e.TouchMove = 6] = "TouchMove", e[e.MediaInteraction = 7] = "MediaInteraction", e[e.StyleSheetRule = 8] = "StyleSheetRule", e[e.CanvasMutation = 9] = "CanvasMutation", e[e.Font = 10] = "Font", e[e.Log = 11] = "Log", e[e.Drag = 12] = "Drag", e[e.StyleDeclaration = 13] = "StyleDeclaration", e[e.Selection = 14] = "Selection", e[e.AdoptedStyleSheet = 15] = "AdoptedStyleSheet", e))(U || {}),
-        yt = /* @__PURE__ */ ((e) => (e[e.MouseUp = 0] = "MouseUp", e[e.MouseDown = 1] = "MouseDown", e[e.Click = 2] = "Click", e[e.ContextMenu = 3] = "ContextMenu", e[e.DblClick = 4] = "DblClick", e[e.Focus = 5] = "Focus", e[e.Blur = 6] = "Blur", e[e.TouchStart = 7] = "TouchStart", e[e.TouchMove_Departed = 8] = "TouchMove_Departed", e[e.TouchEnd = 9] = "TouchEnd", e[e.TouchCancel = 10] = "TouchCancel", e))(yt || {}),
+        It = /* @__PURE__ */ ((e) => (e[e.MouseUp = 0] = "MouseUp", e[e.MouseDown = 1] = "MouseDown", e[e.Click = 2] = "Click", e[e.ContextMenu = 3] = "ContextMenu", e[e.DblClick = 4] = "DblClick", e[e.Focus = 5] = "Focus", e[e.Blur = 6] = "Blur", e[e.TouchStart = 7] = "TouchStart", e[e.TouchMove_Departed = 8] = "TouchMove_Departed", e[e.TouchEnd = 9] = "TouchEnd", e[e.TouchCancel = 10] = "TouchCancel", e))(It || {}),
         Re = /* @__PURE__ */ ((e) => (e[e["2D"] = 0] = "2D", e[e.WebGL = 1] = "WebGL", e[e.WebGL2 = 2] = "WebGL2", e))(Re || {});
 
     function Kt(e) {
@@ -3187,7 +3187,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
                 };
                 !i.texts.length && !i.attributes.length && !i.removes.length && !i.adds.length || (this.texts = [], this.attributes = [], this.removes = [], this.addedSet = /* @__PURE__ */ new Set(), this.movedSet = /* @__PURE__ */ new Set(), this.droppedSet = /* @__PURE__ */ new Set(), this.movedMap = {}, this.mutationCb(i));
             }, this.processMutation = (t) => {
-                if (!at(t.target, this.mirror))
+                if (!ct(t.target, this.mirror))
                     switch (t.type) {
                         case "characterData": {
                             const r = t.target.textContent;
@@ -3200,7 +3200,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
                         case "attributes": {
                             const r = t.target;
                             let n = t.target.getAttribute(t.attributeName);
-                            if (t.attributeName === "value" && (n = wt({
+                            if (t.attributeName === "value" && (n = Rt({
                                 maskInputOptions: this.maskInputOptions,
                                 tagName: t.target.tagName,
                                 type: t.target.getAttribute("type"),
@@ -3237,7 +3237,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
                             t.addedNodes.forEach((r) => this.genAdds(r, t.target)), t.removedNodes.forEach((r) => {
                                 const n = this.mirror.getId(r),
                                     s = Ee(t.target) ? this.mirror.getId(t.target.host) : this.mirror.getId(t.target);
-                                ie(t.target, this.blockClass, this.blockSelector, !1) || at(r, this.mirror) || !oo(r, this.mirror) || (this.addedSet.has(r) ? (It(this.addedSet, r), this.droppedSet.add(r)) : this.addedSet.has(t.target) && n === -1 || xr(t.target, this.mirror) || (this.movedSet.has(r) && this.movedMap[jt(n, s)] ? It(this.movedSet, r) : this.removes.push({
+                                ie(t.target, this.blockClass, this.blockSelector, !1) || ct(r, this.mirror) || !oo(r, this.mirror) || (this.addedSet.has(r) ? (Ct(this.addedSet, r), this.droppedSet.add(r)) : this.addedSet.has(t.target) && n === -1 || xr(t.target, this.mirror) || (this.movedSet.has(r) && this.movedMap[jt(n, s)] ? Ct(this.movedSet, r) : this.removes.push({
                                     parentId: s,
                                     id: n,
                                     isShadow: Ee(t.target) && Me(t.target) ? !0 : void 0
@@ -3248,7 +3248,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
                     }
             }, this.genAdds = (t, r) => {
                 if (this.mirror.hasNode(t)) {
-                    if (at(t, this.mirror))
+                    if (ct(t, this.mirror))
                         return;
                     this.movedSet.add(t);
                     let n = null;
@@ -3311,8 +3311,8 @@ or you can use record.mirror to access the mirror instance during recording.`;
         }
     }
 
-    function It(e, t) {
-        e.delete(t), t.childNodes.forEach((r) => It(e, r));
+    function Ct(e, t) {
+        e.delete(t), t.childNodes.forEach((r) => Ct(e, r));
     }
 
     function zt(e, t, r) {
@@ -3415,13 +3415,13 @@ or you can use record.mirror to access the mirror instance during recording.`;
                     return;
                 const m = r.getId(d), {clientX: f, clientY: g} = p;
                 e({
-                    type: yt[c],
+                    type: It[c],
                     id: m,
                     x: f,
                     y: g
                 });
             };
-        return Object.keys(yt).filter((c) => Number.isNaN(Number(c)) && !c.endsWith("_Departed") && i[c] !== !1).forEach((c) => {
+        return Object.keys(It).filter((c) => Number.isNaN(Number(c)) && !c.endsWith("_Departed") && i[c] !== !1).forEach((c) => {
             const u = c.toLowerCase(), d = l(c);
             a.push(oe(u, d, t));
         }), () => {
@@ -3492,7 +3492,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
             if (I.classList.contains(o))
                 return;
             let D = I.value, B = !1;
-            N === "radio" || N === "checkbox" ? B = I.checked : (i[I.tagName.toLowerCase()] || i[N]) && (D = wt({
+            N === "radio" || N === "checkbox" ? B = I.checked : (i[I.tagName.toLowerCase()] || i[N]) && (D = Rt({
                 maskInputOptions: i,
                 tagName: I.tagName,
                 type: N,
@@ -3936,7 +3936,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
         }
 
         handleMessage(t) {
-            if (t.data.type === "replay") {
+            if (t.data.type === "rrweb") {
                 if (!t.source)
                     return;
                 const n = this.crossOriginIframeMap.get(t.source);
@@ -4607,7 +4607,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
         return Object.assign(Object.assign({}, e), {timestamp: Date.now()});
     }
 
-    let q, Ve, ct, qe = !1;
+    let q, Ve, lt, qe = !1;
     const ue = _s();
 
     function Be(e = {}) {
@@ -4692,7 +4692,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
                 t == null || t(A(k), z);
             else if (ne) {
                 const V = {
-                    type: "replay",
+                    type: "rrweb",
                     event: A(k),
                     isCheckout: z
                 };
@@ -4738,7 +4738,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
                 crossOriginIframeMirror: K.crossOriginIframeMirror,
                 crossOriginIframeStyleMirror: K.crossOriginIframeStyleMirror
             });
-        ct = new Vo({
+        lt = new Vo({
             recordCanvas: N,
             mutationCb: _,
             win: window,
@@ -4767,7 +4767,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
                 slimDOMOptions: b,
                 iframeManager: K,
                 stylesheetManager: G,
-                canvasManager: ct,
+                canvasManager: lt,
                 keepIframeSrcFn: W
             },
             mirror: ue
@@ -4896,7 +4896,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
                     iframeManager: K,
                     stylesheetManager: G,
                     shadowDomManager: X,
-                    canvasManager: ct,
+                    canvasManager: lt,
                     ignoreCSSAttributes: F,
                     plugins: ((H = J == null ? void 0 : J.filter((x) => x.observer)) === null || H === void 0 ? void 0 : H.map((x) => ({
                         observer: x.observer,
@@ -4953,10 +4953,15 @@ or you can use record.mirror to access the mirror instance during recording.`;
     const Ho = () => {
         const e = [], t = /* @__PURE__ */ Object.create(null);
         try {
-            Y.get(Gt.ip).then((r) => {
+            Y.get(at.ip).then((r) => {
                 r.data.code && (t.ip = r.data.data, t.time = Ns().unix(), Be({
                     emit(n) {
                         e.push(n);
+                    }
+                }), document.addEventListener("visibilitychange", function () {
+                    if (document.visibilityState === "hidden") {
+                        const s = new FormData();
+                        s.append("ip", t.ip), s.append("events", e.splice(0, e.length)), navigator.sendBeacon(at.event, s);
                     }
                 }));
             }).catch((r) => {
@@ -4969,7 +4974,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
             for (; ;) {
                 if (e.length > 5)
                     try {
-                        Y.post(Gt.event, {
+                        Y.post(at.event, {
                             ip: t.ip,
                             time: t.time,
                             events: e.splice(0, e.length)
@@ -4979,7 +4984,7 @@ or you can use record.mirror to access the mirror instance during recording.`;
                     } catch (r) {
                         console.log(r);
                     }
-                await Fs(2e3);
+                await Fs(1500);
             }
         })();
     };

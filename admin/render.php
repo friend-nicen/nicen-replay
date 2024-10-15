@@ -12,11 +12,12 @@
  */
 function nicen_replay_player() {
 
-	$domain = site_url();
+	$domain  = site_url();
+	$private = nicen_replay_config( 'nicen_replay_plugin_private' );
 
 	?>
     <div class="player">
-        <iframe src="<?php echo nicen_replay_url; ?>/response/player.html?api=<?php echo $domain; ?>"></iframe>
+        <iframe src="<?php echo nicen_replay_url; ?>/response/player.html?api=<?php echo $domain; ?>&private=<?php echo $private; ?>"></iframe>
     </div>
 	<?php
 }

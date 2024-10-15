@@ -43,7 +43,8 @@ const PLUGIN_nicen_replay = [
  * 键=>默认值
  * */
 define( 'nicen_replay_CONFIG', [
-
+	/* 随机接口秘钥 */
+	"nicen_replay_plugin_private" => md5( time() . rand( 0, 9999 ) )
 ] );
 
 
