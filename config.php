@@ -26,7 +26,7 @@ const PLUGIN_nicen_replay = [
 					[
 						'id'       => 'text_info',
 						'title'    => '功能设置说明',
-						'callback' => 'nicen_make_plugin_form_text',
+						'callback' => 'nicen_replay_plugin_form_text',
 						'args'     => [
 							'info' => '<span style="color: red;">用于设置录制用户行为功能生效范围的一些选项<br/>根据自身需求来定制插件功能</span>'
 						]
