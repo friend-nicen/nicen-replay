@@ -17,6 +17,68 @@ class Nicen_Replay_response {
 		$this->root    = nicen_replay_path . "events/" . nicen_replay_config( 'nicen_replay_plugin_private' ) . "/";
 	}
 
+	/**
+	 * 获取单例
+	 * */
+	public static function getInstance() {
+		/*如果实例不存在*/
+		if ( ! self::$self ) {
+			self::$self = new self();
+		}
+
+		return self::$self;
+	}
+
+	/**
+	 * 接收响应
+	 * */
+	public function response() {
+
+
+		/**
+		 * 接手响应
+		 * */
+
+		try {
+
+			/**
+			 * 获取用户IP
+			 * */
+			if ( isset( $_GET['nicen_replay_getip'] ) ) {
+				$this->nicen_replay_getip();
+			}
+
+			/**
+			 * 事件上报
+			 * */
+			if ( isset( $_GET['nicen_replay_event'] ) ) {
+				$this->nicen_replay_event();
+			}
+
+
+			/**
+			 * 事件查询
+			 * */
+			if ( isset( $_GET['nicen_replay_get_all_logs'] ) ) {
+				$this->auth();
+				$this->nicen_replay_get_all_logs();
+			}
+
+
+			/**
+			 * 事件下载
+			 * */
+			if ( isset( $_GET['nicen_replay_get_event'] ) ) {
+				$this->auth();
+				$this->nicen_replay_get_event();
+			}
+
+
+		} catch ( \Throwable $e ) {
+			$this->error( $e->getMessage() );
+		}
+
+	}
 
 	/**
 	 * 获取用户的IP
@@ -40,6 +102,17 @@ class Nicen_Replay_response {
 		$this->success( 'success', $ip );
 	}
 
+	/**
+	 * @param $msg
+	 * 成功响应
+	 */
+	private function success( $msg, $data ) {
+		return exit( json_encode( [
+			'code'   => 1,
+			'errMsg' => $msg,
+			'data'   => $data
+		], JSON_UNESCAPED_UNICODE ) );
+	}
 
 	/**
 	 * 记录事件
@@ -82,16 +155,40 @@ class Nicen_Replay_response {
 
 		/* 将events变量追加到文件内 */
 		/* 首先，我们需要确保$events是一个数组，然后对其进行JSON编码 */
-		$events_data = json_encode( $json['events'], JSON_UNESCAPED_UNICODE ) . "\n";
+		$events_data = base64_decode( $json['events'] );
 
 
 		/* 将数据追加到文件中 */
-		file_put_contents( $file_path, $events_data, FILE_APPEND | LOCK_EX );
+		file_put_contents( $file_path, $events_data . "\n", FILE_APPEND | LOCK_EX );
 
 		/* 返回成功的响应 */
 		$this->success( 'success', $ip );
 	}
 
+	/**
+	 * @param $msg
+	 * 错误响应
+	 */
+	private function error( $msg ) {
+		return exit( json_encode( [
+			'code'   => 0,
+			'errMsg' => $msg
+		], JSON_UNESCAPED_UNICODE ) );
+	}
+
+	/**
+	 * 验证接口权限
+	 * */
+	public function auth() {
+
+		if ( empty( $_GET['private'] ) && empty( $_POST['private'] ) ) {
+			$this->error( '密钥为空' );
+		}
+
+		if ( ( $_GET['private'] ?? "" ) != $this->private && ( $_POST['private'] ?? "" ) != $this->private ) {
+			$this->error( '密钥有误' );
+		}
+	}
 
 	/**
 	 * 获取所有日志
@@ -171,110 +268,6 @@ class Nicen_Replay_response {
 
 		/* 返回成功响应 */
 		$this->success( 'ok', $data );
-	}
-
-
-	/**
-	 * 接收响应
-	 * */
-	public function response() {
-
-
-		/**
-		 * 接手响应
-		 * */
-
-		try {
-
-			/**
-			 * 获取用户IP
-			 * */
-			if ( isset( $_GET['nicen_replay_getip'] ) ) {
-				$this->nicen_replay_getip();
-			}
-
-			/**
-			 * 事件上报
-			 * */
-			if ( isset( $_GET['nicen_replay_event'] ) ) {
-				$this->nicen_replay_event();
-			}
-
-
-			/**
-			 * 事件查询
-			 * */
-			if ( isset( $_GET['nicen_replay_get_all_logs'] ) ) {
-				$this->auth();
-				$this->nicen_replay_get_all_logs();
-			}
-
-
-			/**
-			 * 事件下载
-			 * */
-			if ( isset( $_GET['nicen_replay_get_event'] ) ) {
-				$this->auth();
-				$this->nicen_replay_get_event();
-			}
-
-
-		} catch ( \Throwable $e ) {
-			$this->error( $e->getMessage() );
-		}
-
-	}
-
-
-	/**
-	 * 验证接口权限
-	 * */
-	public function auth() {
-
-		if ( empty( $_GET['private'] ) && empty( $_POST['private'] ) ) {
-			$this->error( '密钥为空' );
-		}
-
-		if ( ( $_GET['private'] ?? "" ) != $this->private && ( $_POST['private'] ?? "" ) != $this->private ) {
-			$this->error( '密钥有误' );
-		}
-	}
-
-
-	/**
-	 * @param $msg
-	 * 错误响应
-	 */
-	private function error( $msg ) {
-		return exit( json_encode( [
-			'code'   => 0,
-			'errMsg' => $msg
-		], JSON_UNESCAPED_UNICODE ) );
-	}
-
-
-	/**
-	 * @param $msg
-	 * 成功响应
-	 */
-	private function success( $msg, $data ) {
-		return exit( json_encode( [
-			'code'   => 1,
-			'errMsg' => $msg,
-			'data'   => $data
-		], JSON_UNESCAPED_UNICODE ) );
-	}
-
-	/**
-	 * 获取单例
-	 * */
-	public static function getInstance() {
-		/*如果实例不存在*/
-		if ( ! self::$self ) {
-			self::$self = new self();
-		}
-
-		return self::$self;
 	}
 
 

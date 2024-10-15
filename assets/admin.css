@@ -82,7 +82,7 @@
 
 #VueApp .card-container > .ant-tabs-card > .ant-tabs-content .player iframe {
     width: 100%;
-    min-height: 80vh;
+    min-height: 120vh;
 }
 
 
