@@ -29,6 +29,19 @@ add_action( 'admin_menu', 'nicen_replay_menu_register' );
  * */
 function nicen_replay_config_register() {
 
+	/**
+	 * 注册自定义字段
+	 * */
+	register_setting( "nicen_replay_plugin", "nicen_replay_publish_date_start" ); //主题首页副标题
+	register_setting( "nicen_replay_plugin", "nicen_replay_publish_date_end" ); //主题首页副标题
+	register_setting( "nicen_replay_plugin", "nicen_replay_publish_time_start" ); //主题首页副标题
+	register_setting( "nicen_replay_plugin", "nicen_replay_publish_time_end" ); //主题首页副标题
+	register_setting( "nicen_replay_plugin", "nicen_replay_plugin_watermark_filter_width_min" ); //水印过滤宽度最小值
+	register_setting( "nicen_replay_plugin", "nicen_replay_plugin_watermark_filter_width_max" ); //水印过滤宽度最大值
+	register_setting( "nicen_replay_plugin", "nicen_replay_plugin_watermark_filter_height_min" ); //水印过滤宽度最大值
+	register_setting( "nicen_replay_plugin", "nicen_replay_plugin_watermark_filter_height_max" ); //水印过滤宽度最大值
+
+
 	foreach ( PLUGIN_nicen_replay as $item ) {
 		/**
 		 * 如果有分节
@@ -61,6 +74,15 @@ function nicen_replay_config_register() {
 						 * */
 						register_setting( $item['id'], $field['id'] ); //主题首页副标题
 
+
+						/**
+						 * 回调函数如果有自定义输出
+						 * */
+						if ( isset( $field['before'] ) ) {
+							esc_html( $field['before']() );
+						}
+
+
 						/**
 						 * 添加字段
 						 * */
@@ -72,6 +94,15 @@ function nicen_replay_config_register() {
 							$section['id'],
 							$field['args'] ?? []
 						);
+
+
+						/**
+						 * 回调函数如果有自定义输出
+						 * */
+						if ( isset( $field['after'] ) ) {
+							esc_html( $field['after']() );
+						}
+
 					}
 				}
 			}

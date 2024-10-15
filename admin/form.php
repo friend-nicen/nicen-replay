@@ -202,6 +202,14 @@ function nicen_replay_do_settings_sections_user( $page ) {
 
 
 		/**
+		 * 回调函数如果有自定义输出
+		 * */
+		if ( isset( $param['before'] ) ) {
+			esc_html( $param['before']() );
+		}
+
+
+		/**
 		 * 输出输入组件
 		 *
 		 * @param $page integer "菜单页面id"
@@ -213,8 +221,8 @@ function nicen_replay_do_settings_sections_user( $page ) {
 		/**
 		 * 回调函数如果有自定义输出
 		 * */
-		if ( isset( $param['render'] ) ) {
-			esc_html( $param['render']() );
+		if ( isset( $param['after'] ) ) {
+			esc_html( $param['after']() );
 		}
 
 		/*闭合*/
@@ -368,6 +376,24 @@ function nicen_replay_form_multi( $args ) {
 }
 
 
+/**
+ * 媒体选择器
+ * */
+function nicen_replay_form_media( $args ) {
+	?>
+    <div style="width: 100%;display: flex;">
+        <a-input
+                name="<?php echo $args['label_for']; ?>"
+                placeholder="请输入<?php echo $args['title']; ?>"
+                v-model="data.<?php echo $args['label_for']; ?>"
+                allow-clear>
+        </a-input>
 
+        <a-button @click="showMedia('<?php echo $args['label_for']; ?>')" style="margin-left: 15px;" type="plain">
+            选择
+        </a-button>
+    </div>
+	<?php
+}
 
 

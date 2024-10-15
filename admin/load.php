@@ -54,6 +54,15 @@ if ( strpos( $_SERVER['QUERY_STRING'] ?? "", 'nicen_replay_plugin' ) !== false )
  * 前台加载监控
  */
 function nicen_replay_front() {
+
+	/* 全局文章对象 */
+	global $post;
+
+	/* 如果是文章页面，并文章包含密码，未开启录制 */
+	if ( is_singular() && $post && $post->post_password && nicen_replay_config( 'nicen_replay_protect_article' ) ) {
+		return;
+	}
+
 	/* 站点URL */
 	$site_url = site_url();
 	/* 加载外部库 */

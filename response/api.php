@@ -10,9 +10,11 @@ class Nicen_Replay_response {
 
 	private static $self;
 	private $private;
+	private $root;
 
 	private function __construct() {
 		$this->private = get_option( "nicen_replay_plugin_private" );
+		$this->root    = nicen_replay_path . "events/" . nicen_replay_config( 'nicen_replay_plugin_private' ) . "/";
 	}
 
 
@@ -66,7 +68,7 @@ class Nicen_Replay_response {
 
 		/* 创建当天日期的文件夹 */
 		$date_folder = date( 'Y-m-d' ); // 获取当前日期并格式化为YYYY-MM-DD
-		$events_dir  = $root . '/' . $date_folder; // 拼接目录路径
+		$events_dir  = $this->root . $date_folder; // 拼接目录路径
 
 		/* 检查目录是否存在，如果不存在则创建 */
 		if ( ! file_exists( $events_dir ) ) {
@@ -104,7 +106,7 @@ class Nicen_Replay_response {
 		$date = ! empty( $json['date'] ) ? sanitize_text_field( $json['date'] ) : date( 'Y-m-d' );
 
 		/* 构造文件路径 */
-		$glob = $ip ? nicen_replay_path . 'events/' . $date . '/' . $ip . '*' : nicen_replay_path . 'events/' . $date . '/*.*';
+		$glob = $ip ? $this->root . $date . '/' . $ip . '*' : $this->root . $date . '/*.*';
 
 
 		/* 获取匹配的文件列表 */
@@ -113,6 +115,7 @@ class Nicen_Replay_response {
 
 		/* 遍历文件 */
 		foreach ( $files as $file ) {
+			/* 计算文件 */
 			if ( is_file( $file ) ) {
 				/* 获取文件大小 */
 				$size = round( filesize( $file ) / 1024 / 1024, 2 ) . ' MB';
@@ -153,7 +156,7 @@ class Nicen_Replay_response {
 		$file = sanitize_text_field( $json['file'] );
 
 		/* 构造文件路径 */
-		$file_path = nicen_replay_path . 'events/' . $date . '/' . $file;
+		$file_path = $this->root . $date . '/' . $file;
 
 		/* 检查文件是否存在 */
 		if ( ! file_exists( $file_path ) ) {
