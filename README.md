@@ -6,7 +6,7 @@ Description: 一款可以监控并回放用户行为的插件
 Version: 1.0.0
 Author: 友人a丶
 Author URI: https://nicen.cn
-Text Domain: nicen-localize-image
+Text Domain: nicen-replay
 License: GPLv2 or later
  */
 ```
